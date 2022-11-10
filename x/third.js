@@ -1,4 +1,5 @@
 (() => {
+    // AJAX
     let httpRequest;
     document
 	.getElementById("center-text")
