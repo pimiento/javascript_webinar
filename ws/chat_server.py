@@ -18,6 +18,9 @@ class MainHandler(RequestHandler):
         self.render('index.html')
 
 class WSChatHandler(WebSocketHandler):
+    def check_origin(self, origin):
+        return True
+
     def open(self):
         global SOCKETS
         print('Socket opened')
