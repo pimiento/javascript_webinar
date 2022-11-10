@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Colorfull!</title>
+    <script src="/jquery.js"></script>
+    <script>
+	var colorify;
+	$().ready(function() {
+	function getRandomColor() {
+	        let letters = '0123456789ABCDEF',
+		    color = '#';
+	        for (let i = 0; i < 6; i++) {
+	        color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+	}
+	colorify = function () {
+	    let centerText = document.getElementById("center-text");
+	    centerText.style.color=getRandomColor();
+	};
+	});
+    </script>
+    <script src="/x/fourth.js"></script>
+  </head>
+  <body>
+    <center style="font-size:100pt;" id="center-text"><b>COLORFULL</b></center>
+    <button onclick="colorify()" >BUTTON</button>
+  </body>
+</html>

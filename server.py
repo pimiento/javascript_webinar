@@ -3,33 +3,53 @@ import random
 import numpy as np
 from bottle import route, run, view, static_file
 
-prev_values = {
-    "fg": np.array([]),
-    "bg": np.array([])
-}
+
+class Style:
+    def __init__(self, n=5):
+        self.__stack = []
+        self.n = n
+
+    @property
+    def color(self):
+        MAX_TRIES = 10
+        new_color = np.random.choice(np.arange(20, 256), size=3).tolist()
+        while new_color in self.__stack:
+            MAX_TRIES -= 1
+            new_color = np.random.choice(np.arange(20, 256), size=3).tolist()
+            if MAX_TRIES < 0:
+                print(new_color, self.__stack)
+                raise RuntimeError("Your code is shameless!")
+        self.__stack.append(new_color)
+        self.__stack = self.__stack[:-self.n]
+        return new_color
+
+    @property
+    def stack(self):
+        return self.__stack[::]
 
 @route("/")
 @view("index_template")
 def index():
     return {}
 
+@route("/color")
+def getrandomcolor():
+    style = Style()
+    return dict(fg_value=style.color)
+
 @route("/dice")
 def dice():
-    prev_fg = prev_values["fg"]
-    new_fg = prev_fg
-    prev_bg = prev_values["bg"]
-    new_bg = prev_bg
     dice_value = random.randint(1, 6)
-    while np.array_equal(prev_fg, new_fg):
-        new_fg = np.random.choice(range(20, 256), size=3)
-    prev_values["fg"] = new_fg
-    while np.array_equal(prev_bg, new_bg) or np.array_equal(new_fg, new_bg):
-        new_bg = np.random.choice(range(20, 256), size=3)
-    prev_values["bg"] = new_bg
+    fg_style = Style()
+    bg_style = Style()
+    new_fg = fg_style.color
+    new_bg = bg_style.color
+    while new_bg in fg_style.stack:
+        new_bg = bg_style.color
     return dict(
         dice_value=dice_value,
-        fg_value=new_fg.tolist(),
-        bg_value=new_bg.tolist()
+        fg_value=new_fg,
+        bg_value=new_bg
     )
 
 @route("/<filename:re:\w*\.js>")
@@ -43,4 +63,4 @@ def favicon():
         root="."
     )
 
-run(host='0.0.0.0', port=8000)
+run(host='localhost', port=8000, reloader=True)
