@@ -34,13 +34,13 @@ def dice():
 
 @route("/<filename:re:\w*\.js>")
 def send_js(filename):
-    return static_file(filename, root="/home/pimiento/yap/javascript_webinar")
+    return static_file(filename, root=".")
 
 @route("/favicon.ico")
 def favicon():
     return static_file(
         "favicon.ico",
-        root="/home/pimiento/yap/javascript_webinar"
+        root="."
     )
 
-run(host='localhost', port=8000)
+run(host='0.0.0.0', port=8000)
