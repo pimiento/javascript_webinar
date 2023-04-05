@@ -15,7 +15,7 @@ var set_notify = function (delta, message) {
     var when = new Date();
     when.setSeconds(when.getSeconds() + delta);
     $.post("/api/notify/", {ts: when.toISOString(), message: message})
-        .done( function () {n
+        .done( function () {
             send_log("INF", "set notification: " + when + " -- " + message);
         })
         .fail( function (result) {
