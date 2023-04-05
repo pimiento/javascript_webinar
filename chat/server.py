@@ -12,7 +12,6 @@ define('port', default=8000, help='port to listen on', type=int)
 SOCKETS = []
 MESSAGES = []
 
-
 class WSChatHandler(WebSocketHandler):
     def check_origin(self, origin):
         return True
@@ -47,9 +46,8 @@ def main():
 
     APP = Application(
         handlers=[
-            (r'/chat/ws/', WSChatHandler),
+            (r'/chat/ws/', WSChatHandler)
         ],
-        template_path=".",
     )
     http_server = HTTPServer(APP)
     http_server.listen(options.port, address='0.0.0.0')

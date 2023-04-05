@@ -7,7 +7,7 @@ var sendMessage = function (ws) {
 
 $().ready(function() {
     var href = window.location.href.split("//")[1],  // https://domain.com:4000/
-        ws = new WebSocket("ws://" + href + "ws");
+        ws = new WebSocket("ws://" + href + "ws/");
     ws.onopen = function () {
         ws.send('{"init": "init", "type": "conn"}');
     };
