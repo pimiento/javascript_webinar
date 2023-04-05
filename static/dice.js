@@ -9,10 +9,11 @@ $(document).ready(function () {
         $.ajax({
             "url": "/color/json",
         }).done(function (data) {
-            css({
-                "color": "rgb(" + data["fg_value"].join(",") + ")",
-                "background-color": "rgb(" + data["bg_value"].join(",") + ")",
-            });
+            $("#dice_value")
+                .css({
+                    "color": "rgb(" + data["fg_value"].join(",") + ")",
+                    "background-color": "rgb(" + data["bg_value"].join(",") + ")",
+                });
         });
     };
     update();

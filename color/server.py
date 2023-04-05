@@ -27,10 +27,6 @@ class Style:
     def stack(self):
         return self.__stack[::]
 
-@route("/dice")
-def index():
-    return {}
-
 @route("/color/json")
 def getrandomcolor():
     fg_style = Style()
