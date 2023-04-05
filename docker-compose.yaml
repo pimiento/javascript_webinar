@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:1.19.3
+    container_name: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./microservices.conf:/etc/nginx/conf.d/default.conf
+      - ./html:/var/html
+      - ./static:/var/html/static
+    restart: always
+    depends_on:
+      - api1
+      - api2
+      - color
+      - dice
+      - chat
+
+  api1:
+    container_name: api1
+    build:
+      context: ./api1
+      dockerfile: Dockerfile
+
+  api2:
+    container_name: api2
+    build:
+      context: ./api2
+      dockerfile: Dockerfile
+
+  color:
+    container_name: color
+    build:
+      context: ./color
+      dockerfile: Dockerfile
+
+  dice:
+    container_name: dice
+    build:
+      context: ./dice
+      dockerfile: Dockerfile
+
+  chat:
+    container_name: chat
+    build:
+      context: ./chat
+      dockerfile: Dockerfile
