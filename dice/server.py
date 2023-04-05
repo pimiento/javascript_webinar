@@ -28,7 +28,6 @@ class Style:
         return self.__stack[::]
 
 @route("/dice")
-@view("index_template")
 def index():
     return {}
 
@@ -38,4 +37,4 @@ def dice():
     return {'dice_value': dice_value}
 
 
-run(host='localhost', port=8000, reloader=True)
+run(host='0.0.0.0', port=8000, reloader=True)

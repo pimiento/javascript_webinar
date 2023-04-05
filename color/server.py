@@ -27,6 +27,10 @@ class Style:
     def stack(self):
         return self.__stack[::]
 
+@route("/dice")
+def index():
+    return {}
+
 @route("/color/json")
 def getrandomcolor():
     fg_style = Style()
@@ -40,4 +44,4 @@ def getrandomcolor():
         bg_value=new_bg
     )
 
-run(host='localhost', port=8000, reloader=True)
+run(host='0.0.0.0', port=8000, reloader=True)

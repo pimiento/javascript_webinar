@@ -1,9 +1,9 @@
-(() => {
-    // AJAX
-    let httpRequest;
-    document
-        .getElementById("center-text")
-        .addEventListener("click", makeRequest);
+$(function () {
+    // AJAX -> Asynchronous JavaScript and XML (and HTML)
+    let httpRequest,
+        elem = document.getElementById("center-text");
+    console.log(elem);
+    elem.addEventListener("click", makeRequest);
 
     function makeRequest() {
         httpRequest = new XMLHttpRequest();
@@ -13,7 +13,7 @@
             return false;
         }
         httpRequest.onreadystatechange = alertContents;
-        httpRequest.open("GET", "/color");
+        httpRequest.open("GET", "/color/json");
         httpRequest.send();
         return true;
     };
@@ -27,4 +27,4 @@
             }
         }
     };
-})();
+});

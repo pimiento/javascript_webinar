@@ -4,11 +4,15 @@ $(document).ready(function () {
             "url": "/dice/json",
         }).done(function (data) {
             $("#dice_value")
-                .text(data["dice_value"])
-                .css({
-                    "color": "rgb(" + data["fg_value"].join(",") + ")",
-                    "background-color": "rgb(" + data["bg_value"].join(",") + ")",
-                });
+                .text(data["dice_value"]);
+        });
+        $.ajax({
+            "url": "/color/json",
+        }).done(function (data) {
+            css({
+                "color": "rgb(" + data["fg_value"].join(",") + ")",
+                "background-color": "rgb(" + data["bg_value"].join(",") + ")",
+            });
         });
     };
     update();

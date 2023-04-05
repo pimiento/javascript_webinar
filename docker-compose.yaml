@@ -32,6 +32,8 @@ services:
 
   color:
     container_name: color
+    ports:
+      - 192.168.88.4:8001:8000
     build:
       context: ./color
       dockerfile: Dockerfile
